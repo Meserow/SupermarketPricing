@@ -25,16 +25,61 @@ namespace SupermarketPricing.Tests
             var beans = new Product
             {
                 Name = "Beans",
-                Price = 1
+                Price = 1,
+                Quantity = 1
             };
-            
-            _checkout.Products.Add(beans);
+
+            _checkout.AddProduct(beans);
 
             //Act
-            var total = _checkout.CalculateNetTotal(); 
+            var total = _checkout.CalculateNetTotal();
 
             //Assert
             total.Should().Be(1);
         }
+
+        [Test]
+        public void TwoCansOfBeans_CostsTwoDollars()
+        {
+            //Arrange
+            var beans = new Product
+            {
+                Name = "Beans",
+                Price = 1,
+                Quantity = 1
+            };
+
+            _checkout.AddProduct(beans);
+            _checkout.AddProduct(beans);
+
+            //Act
+            var total = _checkout.CalculateNetTotal();
+
+            //Assert
+            total.Should().Be(2);
+        }
+
+        [Test]
+        public void ThreeCansOfBeans_CostsTwoDollars()
+        {
+            //Arrange
+            var beans = new Product
+            {
+                Name = "Beans",
+                Price = 1,
+                Quantity = 1
+            };
+
+            _checkout.AddProduct(beans);
+            _checkout.AddProduct(beans);
+            _checkout.AddProduct(beans);
+             //Act
+            var total = _checkout.CalculateNetTotal();
+
+            //Assert
+            total.Should().Be(2);
+        }
+
+         
     }
 }
