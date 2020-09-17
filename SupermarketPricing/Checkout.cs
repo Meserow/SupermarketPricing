@@ -13,7 +13,18 @@ namespace SupermarketPricing
 
         public decimal CalculateNetTotal()
         {
-            return -1;
+            decimal total = 0;
+            foreach(Product product in Products)
+            {
+                if (product != null)
+                {
+                    if (product.Quantity > 0)
+                    {
+                        total += product.CalculatedPrice();
+                    }
+                }
+            }
+            return total;
         }
     }
 }
